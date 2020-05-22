@@ -12,6 +12,11 @@ class ColorDescriptor:
 	def describe(self, image):
 		# convert the image to the HSV color space and initialize
 		# the features used to quantify the image
+		# b, g, r = cv2.split(image)
+		# red = cv2.equalizeHist(r)
+		# green = cv2.equalizeHist(g)
+		# blue = cv2.equalizeHist(b)
+		# image = cv2.merge((blue, green, red))
 		image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 		features = []
 
@@ -31,17 +36,17 @@ class ColorDescriptor:
 		cv2.ellipse(ellipMask, (cX, cY), (axesX, axesY), 0, 0, 360, 255, -1)
 
 		# loop over the segments
-		for (startX, endX, startY, endY) in segments:
-			# construct a mask for each corner of the image, subtracting
-			# the elliptical center from it
-			cornerMask = np.zeros(image.shape[:2], dtype = "uint8")
-			cv2.rectangle(cornerMask, (startX, startY), (endX, endY), 255, -1)
-			cornerMask = cv2.subtract(cornerMask, ellipMask)
+		# for (startX, endX, startY, endY) in segments:
+		# 	# construct a mask for each corner of the image, subtracting
+		# 	# the elliptical center from it
+		# 	cornerMask = np.zeros(image.shape[:2], dtype = "uint8")
+		# 	cv2.rectangle(cornerMask, (startX, startY), (endX, endY), 255, -1)
+		# 	cornerMask = cv2.subtract(cornerMask, ellipMask)
 
-			# extract a color histogram from the image, then update the
-			# feature vector
-			hist = self.histogram(image, cornerMask)
-			features.extend(hist)
+		# 	# extract a color histogram from the image, then update the
+		# 	# feature vector
+		# 	hist = self.histogram(image, cornerMask)
+		# 	features.extend(hist)
 
 		# extract a color histogram from the elliptical region and
 		# update the feature vector
