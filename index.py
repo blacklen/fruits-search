@@ -28,7 +28,8 @@ for file in files:
 		imageID = file + "/" + imagePath[imagePath.rfind("/") + 1 :]
 
 		image = cv2.imread(imagePath)
-		features = cd.describe(image)
+		# features = cd.describe(image)
+		features = cd.histogram2(image)
 
 		features = [str(f) for f in features]
 		output.write("%s,%s\n" % (imageID, ",".join(features)))

@@ -34,7 +34,7 @@ for s in sample:
 	query = cv2.imread(args["query"] + '/' + s)
 
 	# resize image
-	features = cd.describe(query)
+	features = cd.histogram2(query)
 	# perform the search
 	searcher = Searcher(args["index"])
 	results = searcher.search(features,1)
