@@ -1,16 +1,16 @@
 import cv2
 import numpy as np
 
-image = cv2.imread("queries/banana_100.jpg")
+image = cv2.imread("fruits/114_100.jpg")
 
 # convert image from RGB to HSV
-img_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+img_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
 
 # Histogram equalisation on the V-channel
-img_hsv[:, :, 2] = cv2.equalizeHist(img_hsv[:, :, 2])
+img_hsv[:, :, 0] = cv2.equalizeHist(img_hsv[:, :, 0])
 
 # convert image back from HSV to RGB
-image = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2RGB)
+image = cv2.cvtColor(img_hsv, cv2.COLOR_YUV2BGR)
 
 cv2.imshow("equalizeHist", image)
-cv2.waitKey(0)
+cv2.waitKey(1000)

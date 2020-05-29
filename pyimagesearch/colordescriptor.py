@@ -4,6 +4,7 @@ import cv2
 import imutils
 import matplotlib.pyplot as plt
 import itertools
+from hog import hog
 
 n_bin   = 12        # histogram bins
 n_slice = 3         # slice image
@@ -19,26 +20,23 @@ class ColorDescriptor:
 
 	def _count_hist(self, input, n_bin, bins, channel):
 		img = input.copy()
+		print("bin", np.arange(n_bin))
 		bins_idx = {key: idx for idx, key in enumerate(itertools.product(np.arange(n_bin), repeat=channel))}  # permutation of bins
 		hist = np.zeros(n_bin ** channel)
-			
 		for idx in range(len(bins)-1):
+    			# print(img[(input >= bins[idx]) & (input < bins[idx+1])])
 			img[(input >= bins[idx]) & (input < bins[idx+1])] = idx
 		# add pixels into bins
 		height, width, _ = img.shape
 		for h in range(height):
 			for w in range(width):
-				b_idx = bins_idx[tuple(img[h,w])]
+				b_idx = bins_idx[tuple(img[h, w])]
 				hist[b_idx] += 1
 			
 		return hist
 	
 	def histogram2(self, input, n_bin=n_bin, type=h_type, n_slice=n_slice, normalize=True):
-		
-		if isinstance(input, np.ndarray):  # examinate input type
-			img = input.copy()
-		else:
-			img = cv2.imread(input, cv2.COLOR_BGR2RGB)
+		img = cv2.imread(input, cv2.COLOR_BGR2RGB)
 		height, width, channel = img.shape
 		bins = np.linspace(0, 256, n_bin + 1, endpoint=True)  # slice bins equally for each channel
 
@@ -48,7 +46,7 @@ class ColorDescriptor:
 		elif type == 'region':
 			hist = np.zeros((n_slice, n_slice, n_bin ** channel))
 			h_silce = np.around(np.linspace(0, height, n_slice+1, endpoint=True)).astype(int)
-			w_slice = np.around(np.linspace(0, width, n_slice+1, endpoint=True)).astype(int)
+			w_slice = np.around(np.linspace(0, width, n_slice + 1, endpoint=True)).astype(int)
 		
 		for hs in range(len(h_silce)-1):
 			for ws in range(len(w_slice)-1):
@@ -69,6 +67,10 @@ class ColorDescriptor:
 		# blue = cv2.equalizeHist(b)
 		# image = cv2.merge((blue, green, red))
 		image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+		print(image)
+
+		# Histogram equalisation on the V-channel
+		image[:, :, 2] = cv2.equalizeHist(image[:, :, 2])
 		features = []
 
 		# grab the dimensions and compute the center of the image
@@ -101,10 +103,10 @@ class ColorDescriptor:
 
 		# extract a color histogram from the elliptical region and
 		# update the feature vector
-		hist = self.histogram(image, ellipMask)
-		features.extend(hist)
-		# hist = self.histogram(image, None)
-		# features.extend(hist) 
+		# hist = self.histogram(image, ellipMask)
+		# features.extend(hist)
+		hist = self.histogram(image, None)
+		features.extend(hist) 
 
 		# return the feature vector
 		return features

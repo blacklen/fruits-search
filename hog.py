@@ -5,8 +5,9 @@ from numpy import linalg as LA
 
 IMG = 'queries/banana1.jpg'
 
-def hog(img_gray, cell_size=8, block_size=2, bins=9):
-    img = img_gray
+def hog(img_path, cell_size=8, block_size=2, bins=9):
+    img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    img = cv2.resize(src=img, dsize=(64, 128))
     h, w = img.shape # 128, 64
     
     # gradient

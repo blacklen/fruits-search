@@ -13,6 +13,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib import colors
+from hog import hog
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -31,14 +32,16 @@ cd = ColorDescriptor((8, 12, 3))
 files = os.listdir(args["query"])
 sample = random.sample(files, 1)
 for s in sample:
-	query = cv2.imread(args["query"] + '/' + s)
-
+	queryPath = args["query"] + '/' + s
+	query = cv2.imread(queryPath)
 	# resize image
-	features = cd.histogram2(query)
+	# features = hog(queryPath)
+	features = cd.histogram2(queryPath)
 	# perform the search
 	searcher = Searcher(args["index"])
 	results = searcher.search(features,1)
 	# display the query
+	
 	cv2.imshow("Query", query)
 	cv2.waitKey(1000)
 	# searcher.show_histogram(query)

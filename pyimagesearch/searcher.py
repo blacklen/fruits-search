@@ -49,10 +49,13 @@ class Searcher:
 
 		# return the chi-squared distance
 		return d
+		
+	def d1(self, v1, v2):
+		return np.sum(np.absolute(v1 - v2))
 
 	def show_histogram(self, image):
 		for i, col in enumerate(['b', 'g', 'r']):
-    			hist = cv2.calcHist([image], [i], None, [256], [0, 256])
+			hist = cv2.calcHist([image], [i], None, [256], [0, 256])
 			plt.plot(hist, color=col)
 			plt.xlim([0, 256])
 		plt.show()

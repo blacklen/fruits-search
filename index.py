@@ -7,6 +7,7 @@ import argparse
 import glob
 import cv2
 import os
+from hog import hog
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -26,10 +27,9 @@ for file in files:
 	for imagePath in glob.glob(args["dataset"] + "/" + file + "/*.jpg"):
 
 		imageID = file + "/" + imagePath[imagePath.rfind("/") + 1 :]
-
 		image = cv2.imread(imagePath)
-		# features = cd.describe(image)
-		features = cd.histogram2(image)
+		features = cd.describe(image)
+		# features = hog(imagePath)
 
 		features = [str(f) for f in features]
 		output.write("%s,%s\n" % (imageID, ",".join(features)))
