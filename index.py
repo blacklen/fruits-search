@@ -1,38 +1,32 @@
-# USAGE
-# python index.py --dataset dataset --index index.csv
-
-# import the necessary packages
-from pyimagesearch.colordescriptor import ColorDescriptor
+from descriptor import Descriptor
 import argparse
 import glob
 import cv2
 import os
-from hog import hog
 
-# construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-d", "--dataset", required = True,
-	help = "Path to the directory that contains the images to be indexed")
-ap.add_argument("-i", "--index", required = True,
-	help = "Path to where the computed index will be stored")
+dataset = "dataset_fruit"
+
+ap.add_argument("-r", "--index", required=True)
+ap.add_argument("-d", "--descriptor", required=True)
 args = vars(ap.parse_args())
 
-# initialize the color descriptor
-cd = ColorDescriptor((8, 12, 3))
+descriptor = Descriptor()
 
-# open the output index file for writing
 output = open(args["index"], "w")
-files = os.listdir(args["dataset"])
+files = os.listdir(dataset)
 for file in files:
-	for imagePath in glob.glob(args["dataset"] + "/" + file + "/*.jpg"):
+    for imagePath in glob.glob(dataset + "/" + file + "/*.jpg"):
 
-		imageID = file + "/" + imagePath[imagePath.rfind("/") + 1 :]
-		image = cv2.imread(imagePath)
-		features = cd.describe(image)
-		# features = hog(imagePath)
+        imageID = imagePath[imagePath.rfind("/") + 1:]
+        if args['descriptor'] == 'color':
+            features = descriptor.color(imagePath)
+        elif args['descriptor'] == 'hog':
+            features = descriptor.hog(imagePath)
+        else:
+            features = descriptor.fusion(imagePath)
 
-		features = [str(f) for f in features]
-		output.write("%s,%s\n" % (imageID, ",".join(features)))
+        features = [str(f) for f in features]
+        output.write("%s,%s\n" % (imageID, ",".join(features)))
 
-# close the index file
 output.close()

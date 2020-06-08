@@ -25,6 +25,7 @@ class Searcher:
 				# and our query features
 				features = [float(x) for x in row[1:]]
 				d = self.chi2_distance(features, queryFeatures)
+				# d = self.d1(features,queryFeatures)
 
 				# now that we have the distance between the two feature
 				# vectors, we can udpate the results dictionary -- the
@@ -40,6 +41,7 @@ class Searcher:
 		# more relevant images are at the front of the list)
 		results = sorted([(v, k) for (k, v) in results.items()])
 		# return our (limited) results
+		print(results)
 		return results[:limit]
 
 	def chi2_distance(self, histA, histB, eps = 1e-10):

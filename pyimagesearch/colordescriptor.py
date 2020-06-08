@@ -121,4 +121,18 @@ class ColorDescriptor:
     			hist[i] += hist[i - 1]
 		# return the histogram
 		return hist
-		
+
+	def color(self, imagePath):
+		img = cv2.imread(imagePath)
+		img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+		hist = cv2.calcHist([img], [0, 1, 2], None, self.bins, [0, 180, 0, 256, 0, 256])
+		hist = cv2.normalize(hist, hist).flatten()
+		return hist
+
+	def mix(self, imagePath):
+		features = []
+		hist = self.color(imagePath)
+		features.extend(hist)
+		hog_feature = hog(imagePath)
+		features.extend(hog_feature)
+		return features
