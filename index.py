@@ -3,6 +3,7 @@ import argparse
 import glob
 import cv2
 import os
+from skimage.feature import hog
 
 ap = argparse.ArgumentParser()
 dataset = "dataset_fruit"

@@ -1,0 +1,30 @@
+Query : query-fruit/water-meon.jpg
+Result: Watermelon\melon2.jpg
+
+Query : query-fruit/banana1.jpg
+Result: Banana\63_100.jpg
+
+Query : query-fruit/banana2.jpg
+Result: Banana\r2_164_100.jpg
+
+Query : query-fruit/apricot1.jpg
+Result: Apricot\apricot.jpg
+
+Query : query-fruit/orange1.jpg
+Result: Orange\r_135_100.jpg
+
+Query : query-fruit/kiwi.jpg
+Result: Kiwi\r_230_100.jpg
+
+Query : query-fruit/apple.jpg
+Result: Mangostan\33_100.jpg
+
+Query : query-fruit/strawberry2.jpg
+Result: Lychee\r_85_100.jpg
+
+Query : query-fruit/orange.jpg
+Result: Cocos\r_28_100.jpg
+
+Query : query-fruit/strawberry1.jpg
+Result: Papaya\papaya2.jpg
+
