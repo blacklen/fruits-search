@@ -1,0 +1,30 @@
+Query : query-fruit/peach.jpg
+Result: Peach\Peach(2).jpg
+
+Query : query-fruit/Pitahaya.jpg
+Result: Pitahaya\Pitahaya(1).jpg
+
+Query : query-fruit/orange1.jpg
+Result: Orange\Orange(0).jpg
+
+Query : query-fruit/Mango(0).jpg
+Result: Papaya\Papaya(2).jpg
+
+Query : query-fruit/banana2.jpg
+Result: Avocado\Avocado(1).jpg
+
+Query : query-fruit/water-melon.jpg
+Result: Lemon\Lemon(4).jpg
+
+Query : query-fruit/kiwi.jpg
+Result: Kiwi\Kiwi(8).jpg
+
+Query : query-fruit/apple.jpg
+Result: Mangostan\Mangostan(1).jpg
+
+Query : query-fruit/orange.jpg
+Result: Mango\Mango(4).jpg
+
+Query : query-fruit/Lemon(3).jpg
+Result: Mango\Mango(5).jpg
+

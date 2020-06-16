@@ -1,0 +1,2 @@
+Query : query-fruit/peach.jpg
+Query : query-fruit/apple.jpg
