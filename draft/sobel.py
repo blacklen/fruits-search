@@ -3,11 +3,14 @@ import scipy
 import scipy.signal as sig
 import cv2
 import matplotlib.pyplot as plt
+from util import resize_image
 # With mode="L", we force the image to be parsed in the grayscale, so it is
 # actually unnecessary to convert the photo color beforehand.
-img = cv2.imread("query-fruit/apple.jpg", cv2.IMREAD_GRAYSCALE)
+img_path = "dataset_fruit/Apple/Apple(0).jpg"
+img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 img = cv2.resize(src=img, dsize=(64, 64))
-
+# img = resize_image(, 64, 128)
+# img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # Define the Sobel operator kernels.
 # kernel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
 # kernel_y = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])

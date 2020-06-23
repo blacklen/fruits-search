@@ -1,30 +1,30 @@
-Query : query-fruit/banana2.jpg
-Result: Lemon\Lemon(4).jpg
-
-Query : query-fruit/water-melon.jpg
-Result: Starfruit\Starfruit(1).jpg
-
-Query : query-fruit/apple.jpg
-Result: Lemon\Lemon(6).jpg
-
-Query : query-fruit/orange.jpg
-Result: Orange\Orange(0).jpg
-
 Query : query-fruit/Mango(0).jpg
 Result: Lemon\Lemon(4).jpg
 
+Query : query-fruit/Cocos(1).jpg
+Result: Pear\Pear(1).jpg
+
+Query : query-fruit/pitahaya.jpg
+Result: Pitahaya\Pitahaya(5).jpg
+
 Query : query-fruit/peach.jpg
+Result: Orange\orange(2).jpg
+
+Query : query-fruit/banana1.jpg
+Result: Lemon\Lemon(7).jpg
+
+Query : query-fruit/kaki.jpg
+Result: Orange\Orange(0).jpg
+
+Query : query-fruit/apple.jpg
+Result: Pomegranate\Pomegranate(2).jpg
+
+Query : query-fruit/watermelon.jpg
+Result: Watermelon\Watermelon(3).jpg
+
+Query : query-fruit/orange.jpg
 Result: Starfruit\Starfruit(3).jpg
 
-Query : query-fruit/kiwi.jpg
-Result: Kiwi\Kiwi(10).jpg
-
-Query : query-fruit/Lemon(3).jpg
-Result: Guava\Guava(3).jpg
-
-Query : query-fruit/Pitahaya.jpg
-Result: Pitahaya\Pitahaya(1).jpg
-
-Query : query-fruit/orange1.jpg
-Result: Peach\Peach(0).jpg
+Query : query-fruit/starfruit.jpg
+Result: Starfruit\Starfruit(0).jpg
 

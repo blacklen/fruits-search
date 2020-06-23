@@ -18,10 +18,12 @@ def resize_image(img_path, img_width, img_height):
 
     if h == img_height and w == img_width:
         return img
-    if h >= w:
-        scale = img_height / h
+    scale_h = img_height / h
+    scale_w = img_width / w
+    if scale_h > scale_w:
+        scale = scale_w
     else:
-        scale = img_width / w
+        scale = scale_h
 
     width = int(w * scale)
     height = int(h * scale)

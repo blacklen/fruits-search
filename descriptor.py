@@ -6,37 +6,41 @@ import itertools
 from skimage.feature import hog
 from skimage import color
 from util import normalize, resize_image
+import scipy.signal as sig
 
 bins = 9
 
 class Descriptor:
+
+    def __init__(self):
+        pass
     
     def color(self, imagePath):
         img = cv2.imread(imagePath)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        hist = cv2.calcHist([img], [0, 1,2], None, (8,12,3), [0, 180, 0, 256,0,256])
+        hist = cv2.calcHist([img], [0, 1, 2], None, (8,12,3), [0, 180, 0, 256,0, 256])
         hist = hist.flatten()
         for i in range(1, len(hist)):
             hist[i] += hist[i - 1]
         return normalize(hist)
 
     def hog(self, img_path, cell_size=8, block_size=2):
-        img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
-        img = cv2.resize(src=img, dsize=(64, 128), interpolation=cv2.INTER_AREA)
+        img = resize_image(img_path, 64,128)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         h, w = img.shape
         
         # gradient
         xkernel = np.array([[-1, 0, 1]])
         ykernel = np.array([[-1], [0], [1]])
 
-        dx = cv2.filter2D(img, cv2.CV_32F, xkernel)
-        dy = cv2.filter2D(img, cv2.CV_32F, ykernel)
-
+        dx = sig.convolve2d(img, xkernel, mode='same')
+        dy = sig.convolve2d(img, ykernel, mode='same')
+        
         # histogram
         magnitude = np.sqrt(np.square(dx) + np.square(dy))
-        orientation = np.arctan(np.divide(dy, dx+0.00001)) # radian
-        orientation = np.degrees(orientation) # -90 -> 90
-        orientation += 90  # 0 -> 180
+        orientation = np.arctan(np.divide(dy, dx+0.00001))
+        orientation = np.degrees(orientation)
+        orientation += 90
 
         num_cell_x = w // cell_size
         num_cell_y = h // cell_size
@@ -49,8 +53,6 @@ class Descriptor:
                 for (m, d) in zip(mag.flatten(), directions.flatten()):
                     self.assign_bucket_vals(m, d, bucket_vals)
                 hist[cy, cx, :] = bucket_vals
-            pass
-        pass
         
         # normalization
         redundant_cell = block_size-1
@@ -61,10 +63,10 @@ class Descriptor:
                 by_to = by+block_size
                 bx_from = bx
                 bx_to = bx+block_size
-                v = hist[by_from:by_to, bx_from:bx_to, :].flatten() # to 1-D array (vector)
+                v = hist[by_from:by_to, bx_from:bx_to, :].flatten()
                 features[by, bx, :] = v / np.linalg.norm(v)
 
-                if np.isnan(features[by, bx, :]).any(): # avoid NaN (zero division)
+                if np.isnan(features[by, bx, :]).any():
                     features[by, bx, :] = v
         
         return normalize(features.flatten())

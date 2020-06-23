@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from util import insertToFile
 from skimage.feature import hog
+from util import resize_image
 
 ap = argparse.ArgumentParser()
 resultPath = "dataset_fruit"
