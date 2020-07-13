@@ -4,11 +4,8 @@ import argparse
 import cv2
 import random
 import os
-import matplotlib.pyplot as plt
 import numpy as np
-from util import insertToFile
-from skimage.feature import hog
-from util import resize_image
+from util import resize_image, insertToFile
 
 ap = argparse.ArgumentParser()
 resultPath = "dataset_fruit"
@@ -22,7 +19,7 @@ args = vars(ap.parse_args())
 
 descriptor = Descriptor()
 files = os.listdir(queryset)
-sample = random.sample(files, 10)
+sample = random.sample(files, 14)
 
 for s in sample:
     queryPath = queryset + '/' + s
@@ -30,9 +27,6 @@ for s in sample:
 
     content = "Query : %s\n" % (queryPath)
     insertToFile(args["output"], content)
-
-    cv2.imshow("Query", query)
-    cv2.waitKey(1000)
 
     if args["descriptor"] == 'color':
         features = descriptor.color(queryPath)
@@ -45,5 +39,6 @@ for s in sample:
     results = searcher.search(features, args["output"], 1)
     for (score, resultID) in results:
         result = cv2.imread(resultPath + "/" + resultID)
+        cv2.imshow("Query", query)
         cv2.imshow("Result", result)
         cv2.waitKey(1000)

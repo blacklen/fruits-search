@@ -16,7 +16,7 @@ class Searcher:
 
             for row in reader:
                 features = [float(x) for x in row[1:]]
-                d = self.euclid(features,queryFeatures)
+                d = self.euclidean(features,queryFeatures)
 
                 results[row[0]] = d
             f.close()
@@ -26,7 +26,7 @@ class Searcher:
         insertToFile(outputPath,"Result: %s\n\n" % ( ",".join(result)))
         return results[:limit]
 
-    def euclid(self, v1, v2):
-        return np.linalg.norm(v1 - v2)
+    def euclidean(self, v1, v2):
+        return np.sqrt(np.sum(np.square(v1 - v2)))
         
     

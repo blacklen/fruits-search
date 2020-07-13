@@ -1,0 +1,44 @@
+Query : query-fruit/watermelon.jpg
+Result: Avocado\avocado1.jpg
+
+Query : query-fruit/lychee2.jpg
+Result: Lychee\lychee(0).jpg
+
+Query : query-fruit/orange(2).jpg
+Result: Orange\Orange(8).jpg
+
+Query : query-fruit/peach.jpg
+Result: Peach\peach-2497691_640.jpg
+
+Query : query-fruit/starfruit5.jpg
+Result: Papaya\papaya-500x554.jpg
+
+Query : query-fruit/papaya.jpg
+Result: Avocado\avocado1.jpg
+
+Query : query-fruit/strawberry1.jpg
+Result: Pomegranate\pomegranate1.jpg
+
+Query : query-fruit/banana1.jpg
+Result: Banana\Banana(7).jpg
+
+Query : query-fruit/apple.jpg
+Result: Pomegranate\pomegranate4.jpg
+
+Query : query-fruit/kiwi.jpg
+Result: Orange\Orange(7).jpg
+
+Query : query-fruit/coco8.jpg
+Result: Grapefruit\grapefruit2.jpg
+
+Query : query-fruit/lemon.jpg
+Result: Lychee\lychee7.jpg
+
+Query : query-fruit/mango10.jpg
+Result: Watermelon\watermelon1.jpg
+
+Query : query-fruit/pitahaya.jpg
+Result: Pitahaya\pitahaya23.jpg
+
+Total = 5/14
+
